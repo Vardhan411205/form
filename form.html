@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Application Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-image: url("https://plus.unsplash.com/premium_vector-1697729510037-b7f652020cb1?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8NGslMjBsYXB0b3AlMjB3YWxscGFwZXJ8ZW58MHx8MHx8fDA%3D");
+            background-position: 0 -50px;
+            background-position-y: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 900;
+            font-size: 1.3em;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            justify-items: center;
+        }
+        fieldset {
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5), 
+                  -5px -5px 15px rgba(0, 0, 0, 0.5);
+            perspective: 1000px;
+            backdrop-filter: blur(7px);
+            width: auto;
+            margin: 20px;
+            padding-top: 0;
+            padding: 5px 20px;
+            border-color: black;
+            border-radius: 50px;
+            color: black;
+        }
+        h1 {
+            height: auto;
+            width: auto;
+            text-align: center;
+            font-size: 60px;
+            padding: 5px;
+            border-bottom: 2px solid black;
+            border-radius: 30px;
+        }
+        .button1, .button2 {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5), 
+                  -5px -5px 15px rgba(0, 0, 0, 0.5);
+        }
+        .button1 {
+            background: linear-gradient(0deg, orange, white, orange);
+            border-color: orange;
+        }
+        .button2 {
+            background: linear-gradient(0deg, rgb(0, 255, 25), white, rgb(0, 255, 25));
+            border-color: #90ee90;
+        }
+        .button1:hover { background: linear-gradient(0deg, white, orange, white); }
+        .button2:hover { background: linear-gradient(0deg, white, rgb(0,255,25), white); }
+        
+        /* CV Output Styles */
+        .cv-container {
+            max-width: 800px;
+            margin: 20px 20px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5), 
+                  -5px -5px 15px rgba(0, 0, 0, 0.5);
+            perspective: 1000px;
+            backdrop-filter: blur(7px);
+        }
+        .cv-header {
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+            border-radius: 30px;
+            justify-content: center;
+        }
+        .profile-photo {
+            align-items: center;
+            margin: 0 auto;
+            width: auto;
+            height: 100px;
+            object-fit: cover;
+        }
+        p{
+            height:auto;
+            font-size: 1.52em;
+            text-align: center;
+            justify-content: center;
+        }
+        .cv-name {
+            font-size: 2.5em;
+            margin: 0;
+            color: black;
+        }
+        .cv-details {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            grid-template-columns: 1fr 2fr;
+            margin-top: 5px;
+            gap: 2px;
+        }
+        .cv-details div{
+            display: flex;
+            border: 2px solid black;
+            padding: 3px;
+        }
+        .cv-label {
+            font-weight: bold;
+            color: black;
+        }
+        .preview-image {
+            max-width: 50px;
+            max-height: 50px;
+            margin-top: 5px;
+        }
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 0.8em;
+                background-size: cover;
+                padding: 8px;
+                overflow-y: scroll;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            fieldset {
+                padding: 8px;
+            }
+
+            #data-table td {
+                display: block;
+                width: 100%;
+            }
+
+            #data-table td:first-child {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .cv-details {
+                grid-template-columns: 1fr;
+            }
+
+            .button1, .button2 {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="form-container">
+        <form id="applicationForm">
+            <fieldset>
+                <h1><img src="https://cdn.wallpapersafari.com/59/54/sfJT1u.jpg" alt="Logo" style="width: 50px; border-radius: 50px; margin-right: 10px;">Application Form</h1>
+                <table id="data-table">
+                    <tbody>
+                        <tr>
+                            <td>First Name</td>
+                            <td><input type="text" name="firstName" id="firstName" placeholder="First Name" required></td>
+                            <div id="firstNameError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td><input type="text" name="lastName" id="lastName" placeholder="Last Name" required></td>
+                            <div id="lastNameError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <input type="radio" name="gender" value="Male" required> Male
+                                <input type="radio" name="gender" value="Female" required> Female
+                                <input type="radio" name="gender" value="Others" required> Others
+                            </td>
+                            <div id="genderError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth</td>
+                            <td><input type="date" name="dob" id="dob" required></td>
+                            <div id="dobError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Mobile Number</td>
+                            <td><input type="tel" name="phone" id="mobile" placeholder="Mobile" required></td>
+                            <div id="mobileError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="email" name="mail" id="mail" placeholder="Email" required></td>
+                            <div id="mailError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Registration Number</td>
+                            <td><input type="text" name="regnum" id="regnum" placeholder="Registration Number" required></td>
+                            <div id="regnumError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td><input type="text" name="age" id="age" placeholder="Age" required></td>
+                            <div id="ageError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Branch</td>
+                            <td>
+                                <select name="branch" required>
+                                    <option value="" disabled selected>Choose a branch</option>
+                                    <option value="Data Science">Data Science</option>
+                                    <option value="Statistics">Statistics</option>
+                                    <option value="Mpcs">Mpcs</option>
+                                    <option value="Mpc">Mpc</option>
+                                    <option value="B.Voc">B.Voc</option>
+                                    <option value="Iot">Iot</option>
+                                </select>
+                            </td>
+                            <div id="branchError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Skills</td>
+                            <td>
+                                <input type="checkbox" name="skills" value="Python"> Python
+                                <input type="checkbox" name="skills" value="Html"> Html
+                                <input type="checkbox" name="skills" value="Css"> Css
+                                <input type="checkbox" name="skills" value="Js"> Js
+                                <input type="checkbox" name="skills" value="MySql"> MySql
+                                <input type="checkbox" name="skills" value="Django"> Django
+                            </td>
+                            <div id="skillsError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td><textarea name="address" id="address" rows="3" cols="25" placeholder="Address" required></textarea></td>
+                            <div id="skillsError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Resume</td>
+                            <td><input type="file" name="file" id="file" accept=".pdf" required></td>
+                            <div id="fileError" class="error"></div>
+                        </tr>
+                        <tr>
+                            <td>Profile Photo</td>
+                            <td>
+                                <input type="file" name="photo" id="photo" accept="image/*" required>
+                                <div id="imagePreview"></div>
+                            </td>
+                            <div id="photoError" class="error"></div>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="reset" class="button1">Reset</button>
+                <button type="submit" class="button2" id="submit">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <script>
+        // Image preview
+        document.getElementById('photo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.innerHTML = `<img src="${e.target.result}" class="preview-image">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        const form = document.getElementById("applicationForm");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const photo = document.getElementById("photo").files[0];
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const dob = document.getElementById("dob").value;
+            const age = document.getElementById("age").value.trim();
+            const mobile = document.getElementById("mobile").value.trim();
+            const email = document.getElementById("mail").value.trim();
+            const regnum = document.getElementById("regnum").value.trim();
+            const branch = document.querySelector('select[name="branch"]').value;
+            const skills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(skill => skill.value);
+            const address = document.getElementById("address").value.trim();
+            const resumeFile = document.getElementById("file").files[0];
+
+            if (!photo || !firstName || !lastName || !gender || !dob || !age || !mobile || !email || !regnum || !branch || !skills.length || !address || !resumeFile) {
+                alert("Please fill out all required fields.");
+                return;
+            }
+
+            // Create CV layout
+            const cvContainer = document.createElement("div");
+            cvContainer.className = "cv-container";
+
+            const photoURL = URL.createObjectURL(photo);
+            const fullName = `${firstName} ${lastName}`;
+
+            cvContainer.innerHTML = `
+                <div class="cv-header">
+                    <h2 class="cv-name">Submitted Details</h2>
+                </div>
+                <div class="cv-details">
+                    <div class="cv-label"><img src="${photoURL}" alt="Profile Photo" class="profile-photo"></div>
+                    <div><p>${fullName}</p></div>
+
+                    <div class="cv-label">Gender</div>
+                    <div>${gender}</div>
+                    
+                    <div class="cv-label">Date of Birth</div>
+                    <div>${dob}</div>
+                    
+                    <div class="cv-label">Age</div>
+                    <div>${age}</div>
+                    
+                    <div class="cv-label">Mobile</div>
+                    <div>${mobile}</div>
+                    
+                    <div class="cv-label">Email</div>
+                    <div>${email}</div>
+                    
+                    <div class="cv-label">Reg Number</div>
+                    <div>${regnum}</div>
+                    
+                    <div class="cv-label">Branch</div>
+                    <div>${branch}</div>
+                    
+                    <div class="cv-label">Skills</div>
+                    <div>${skills.join(", ")}</div>
+                    
+                    <div class="cv-label">Address</div>
+                    <div>${address}</div>
+                    
+                    <div class="cv-label">Resume</div>
+                    <div><a href="${URL.createObjectURL(resumeFile)}" target="_blank" style="text-decoration:none;">View Resume</a></div>
+                </div>
+            `;
+
+            document.body.innerHTML = "";
+            document.body.appendChild(cvContainer);
+        });
+
+        // Form validation functions
+        function validateName(name) {
+            return /^[A-Za-z\s]{2,}$/.test(name);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^\d{10}$/.test(phone);
+        }
+
+        function validateAge(age) {
+            const ageNum = parseInt(age);
+            return !isNaN(ageNum) && ageNum >= 18 && ageNum <= 100;
+        }
+
+        function validateRegNum(regNum) {
+            return /^[A-Za-z0-9]{5,}$/.test(regNum);
+        }
+
+        function showError(elementId, message) {
+            const errorDiv = document.getElementById(elementId + 'Error');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+            }
+        }
+
+        function clearError(elementId) {
+            const errorDiv = document.getElementById(elementId + 'Error');
+            if (errorDiv) {
+                errorDiv.textContent = '';
+            }
+        }
+
+        // File validation
+        function validateFile(file, type) {
+            if (!file) return false;
+            if (type === 'image') {
+                return file.type.startsWith('image/');
+            } else if (type === 'pdf') {
+                return file.type === 'application/pdf';
+            }
+            return false;
+        }
+
+        // Form submission handler
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            // Validate First Name
+            const firstName = document.getElementById("firstName").value.trim();
+            if (!validateName(firstName)) {
+                showError("firstName", "Please enter a valid first name (letters only, minimum 2 characters)");
+                isValid = false;
+            } else {
+                clearError("firstName");
+            }
+
+            // Validate Last Name
+            const lastName = document.getElementById("lastName").value.trim();
+            if (!validateName(lastName)) {
+                showError("lastName", "Please enter a valid last name (letters only, minimum 2 characters)");
+                isValid = false;
+            } else {
+                clearError("lastName");
+            }
+
+            // Validate Email
+            const email = document.getElementById("mail").value.trim();
+            if (!validateEmail(email)) {
+                showError("mail", "Please enter a valid email address");
+                isValid = false;
+            } else {
+                clearError("mail");
+            }
+
+            // Validate Phone
+            const phone = document.getElementById("mobile").value.trim();
+            if (!validatePhone(phone)) {
+                showError("mobile", "Please enter a valid 10-digit phone number");
+                isValid = false;
+            } else {
+                clearError("mobile");
+            }
+
+            // Validate Age
+            const age = document.getElementById("age").value.trim();
+            if (!validateAge(age)) {
+                showError("age", "Please enter a valid age between 18 and 100");
+                isValid = false;
+            } else {
+                clearError("age");
+            }
+
+            // Validate Registration Number
+            const regNum = document.getElementById("regnum").value.trim();
+            if (!validateRegNum(regNum)) {
+                showError("regnum", "Please enter a valid registration number (minimum 5 alphanumeric characters)");
+                isValid = false;
+            } else {
+                clearError("regnum");
+            }
+
+            // Validate Gender
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                showError("gender", "Please select a gender");
+                isValid = false;
+            } else {
+                clearError("gender");
+            }
+
+            // Validate Branch
+            const branch = document.querySelector('select[name="branch"]').value;
+            if (!branch) {
+                showError("branch", "Please select a branch");
+                isValid = false;
+            } else {
+                clearError("branch");
+            }
+
+            // Validate Skills
+            const skills = document.querySelectorAll('input[name="skills"]:checked');
+            if (skills.length === 0) {
+                showError("skills", "Please select at least one skill");
+                isValid = false;
+            } else {
+                clearError("skills");
+            }
+
+            // Validate Files
+            const photo = document.getElementById("photo").files[0];
+            if (!validateFile(photo, 'image')) {
+                showError("photo", "Please upload a valid image file");
+                isValid = false;
+            } else {
+                clearError("photo");
+            }
+
+            const resume = document.getElementById("file").files[0];
+            if (!validateFile(resume, 'pdf')) {
+                showError("file", "Please upload a valid PDF file");
+                isValid = false;
+            } else {
+                clearError("file");
+            }
+
+            // If all validations pass, proceed with form submission
+            if (isValid) {
+                // Create and display CV (previous code remains the same)
+                // ... Rest of the CV creation code ...
+            }
+        });
+
+        // Image preview code (previous code remains the same)
+        document.getElementById('photo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.innerHTML = `<img src="${e.target.result}" class="preview-image">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
