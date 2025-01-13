@@ -445,7 +445,7 @@
 
             // Validate Age
             const age = document.getElementById("age").value.trim();
-            if (age < 18 && age > 60)) {
+            if (age < 18 || age > 60)) {
                 showError("age", "Please enter a valid age between 18 and 100");
                 isValid = false;
             } else {
